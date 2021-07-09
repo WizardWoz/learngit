@@ -8,7 +8,7 @@
 //增强双链表通用性
 struct Node
 {
-    void* data;             //void*，可指向任意数据类型
+    int data;             //void*，可指向任意数据类型
     struct Node* prev;      //指向前一个结点的指针
     struct Node* next;      //指向后一个结点的指针
 };
@@ -26,8 +26,8 @@ struct DualList
 /*依据arr数组，和length数组长度，使用头插法/尾插法建立双链表*/
 void InitList(struct DualList* dl,int* arr,int length,int choose);
 
-/*从头部/尾部开始打印双链表*/
-void PrintList(struct DualList* dl,int choose);
+/*从头部开始打印双链表*/
+void PrintList(struct DualList* dl);
 
 /*根据data值查找双链表中元素位置index*/
 int SearchIndex(struct DualList* dl,int data);
@@ -48,6 +48,6 @@ struct Node* ListQuickSort(struct Node* left,struct Node* right);
 void SortRecursion(struct Node* left,struct Node* right);
 
 /*销毁双链表*/
-void DstroyList(struct DualList* dl);
+void DestroyList(struct Node* p,struct Node* q);
 
 #endif

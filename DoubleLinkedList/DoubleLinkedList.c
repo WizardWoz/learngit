@@ -8,6 +8,10 @@ void InitList(struct DualList* dl,int* arr,int length,int choose){
     //统一插入/删除时由于结点数目不同，而不同的操作
     dl->head=(struct Node*)malloc(sizeof(struct Node));
     dl->tail=(struct Node*)malloc(sizeof(struct Node));
+    if(NULL==dl->head||NULL==dl->tail){
+        return;
+    }
+
     dl->head->prev=NULL;
     dl->head->next=dl->tail;
     dl->tail->next=NULL;
@@ -42,25 +46,14 @@ void InitList(struct DualList* dl,int* arr,int length,int choose){
 }
 
 /*从头部/尾部开始打印双链表*/
-void PrintList(struct DualList* dl,int choose){
+void PrintList(struct DualList* dl){
     struct Node* p=NULL;
-    printf("当前双链表：");
-    if(choose==0){      //choose==0从头部开始打印
-        p=dl->head->next;
-        while(p!=dl->tail){
-            printf("%d ",p->data);
-            p=p->next;
-        }
-        printf("\n");
+    p=dl->head->next;
+    while(p!=dl->tail){
+        printf("%d ",p->data);
+        p=p->next;
     }
-    else if(choose==1){ //choose==1从尾部开始打印
-        p=dl->tail->prev;
-        while(p!=dl->head){
-            printf("%d ",p->data);
-            p=p->prev;
-        }
-        printf("\n");
-    }
+    printf("\n");
 }
 
 /*根据data值查找双链表中元素位置index*/
@@ -156,7 +149,8 @@ struct Node* ListQuickSort(struct Node* left,struct Node* right){
     int temp;
     while(left!=right){
         //一趟排序的搜索过程是先左后右
-        while(left->data>right->data){      //先从左边开始搜索
+        //先从左边开始搜索，left!=right是为了排除双链表中有多个相同元素的影响
+        while(left!=right&&left->data>=right->data){      
             left=left->next;
         }
         if(left!=right){            //当左边left->data值小于右边right->data值
@@ -165,7 +159,7 @@ struct Node* ListQuickSort(struct Node* left,struct Node* right){
             right->data=temp;
         }
     
-        while(right->data<left->data){      //再从右边开始搜索
+        while(left!=right&&right->data<=left->data){      //再从右边开始搜索
             right=right->prev;
         }
         if(left!=right){            //当左边left->data值小于右边right->data值
@@ -193,15 +187,14 @@ void SortRecursion(struct Node* left,struct Node* right){
     }
 }
 
-/*销毁双链表*/
-void DstroyList(struct DualList* dl){
-    struct Node* p=NULL;
-    struct Node* q=NULL;
-    p=dl->head;
-    q=p->next;
-    while(p!=NULL){
+/*销毁双链表，从dl->head开始递归销毁*/
+void DestroyList(struct Node* p,struct Node* q){
+    if(p!=NULL){
         free(p);
         p=q;
-        q=q->next;
+        if(q!=NULL){
+            q=q->next;
+        }
+        DestroyList(p,q);
     }
 }

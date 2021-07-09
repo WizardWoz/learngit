@@ -15,6 +15,7 @@ int main(void){
 
     dl=(struct DualList*)malloc(sizeof(struct DualList));
     //需要修改：所有函数只能有一个出口
+    //判断内存是否分配成功
     if(NULL==dl){
         printf("内存分配失败");
         
@@ -38,9 +39,8 @@ int main(void){
     scanf("%d",&choose);
     InitList(dl,arr,length,choose);
     
-    printf("使用何种方法打印双链表（0为顺序，1为逆序）：");
-    scanf("%d",&choose);
-    PrintList(dl,choose);
+    printf("顺序打印双链表：");
+    PrintList(dl);
 
     printf("查找元素data对应的位置index：");
     scanf("%d",&data);
@@ -57,7 +57,7 @@ int main(void){
         printf("位置为index的元素对应的值data为：%d\n",SearchData(dl,index));
     }
     else{
-        printf("位置下标输入有误");
+        printf("位置下标输入有误\n");
     }
     
 
@@ -70,9 +70,8 @@ int main(void){
         printf("位置index插入值为data的元素失败\n");
     }
 
-    printf("使用何种方法打印双链表（0为顺序，1为逆序）：");
-    scanf("%d",&choose);
-    PrintList(dl,choose);
+    printf("顺序打印双链表：");
+    PrintList(dl);
 
     printf("删除双链表位置index的元素：");
     scanf("%d",&index);
@@ -83,18 +82,18 @@ int main(void){
         printf("删除位置index的元素失败\n");
     }
 
-    printf("使用何种方法打印双链表（0为顺序，1为逆序）：");
-    scanf("%d",&choose);
-    PrintList(dl,choose);
+    printf("顺序打印双链表：");
+    PrintList(dl);
 
     printf("对双链表进行快速排序（逆序）......\n");
     SortRecursion(dl->head->next,dl->tail->prev);
 
-    printf("使用何种方法打印双链表（0为顺序，1为逆序）：");
-    scanf("%d",&choose);
-    PrintList(dl,choose);
+    printf("顺序打印双链表：");
+    PrintList(dl);
 
     printf("销毁双链表......\n");
+    DestroyList(dl->head,dl->head->next);
+
     free(arr);
 
     return 0;
