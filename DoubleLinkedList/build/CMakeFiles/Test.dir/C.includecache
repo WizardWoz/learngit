@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/DoubleLinkedList.h
+stdlib.h
+-
+
+../include/IOData.h
+stdlib.h
+-
+stdbool.h
+-
+DoubleLinkedList.h
+../include/DoubleLinkedList.h
+
+/home/george/C_Programs/DoubleLinkedList/ListTest.c
+stdio.h
+-
+stdbool.h
+-
+DoubleLinkedList.h
+/home/george/C_Programs/DoubleLinkedList/DoubleLinkedList.h
+IOData.h
+/home/george/C_Programs/DoubleLinkedList/IOData.h
+

@@ -1,0 +1,1 @@
+/usr/bin/cc   -rdynamic CMakeFiles/Test.dir/src/DoubleLinkedList.c.o CMakeFiles/Test.dir/src/IOData.c.o CMakeFiles/Test.dir/ListTest.c.o  -o Test 

@@ -59,11 +59,16 @@ bool DelDataAtIndex(struct DualList* dl,int index){
 /*删除指定data值的IOData结点*/
 bool DelDataOfValue(struct DualList* dl,int data){
     struct Node* p=NULL;
+    int count=0;
     list_foreach_head(p,dl->head,dl->tail){
         if((first_addr(struct IOData,p))->data==data){
             DeleteNode(p);
             free(first_addr(struct IOData,p));
+            count++;
         }
+    }
+    if(count!=0){
+        return true;
     }
     return false;
 }
@@ -86,7 +91,6 @@ void DestroyDataList(struct DualList* dl){
         p=q;
         q=q->next;
     }
-    free(dl->tail);
 }
 
 /*快速排序其中一趟，按逆序排*/
