@@ -85,11 +85,12 @@ void PrintDataNode(struct DualList* dl){
 /*销毁整个IOData链表*/
 void DestroyDataList(struct DualList* dl){
     struct Node* p=dl->head->next;
-    struct Node* q=p->next;
-    while(p!=dl->tail){
+    list_foreach_head(p,dl->head,dl->tail){
+        printf("%p %p\n",dl->head,dl->tail);
+        printf("%p %p\n",dl->head->next,dl->tail->prev);
+        printf("%p %p\n",first_addr(struct IOData,dl->head->next),first_addr(struct IOData,dl->tail->prev));
+        DeleteNode(p);
         free(first_addr(struct IOData,p));
-        p=q;
-        q=q->next;
     }
 }
 
