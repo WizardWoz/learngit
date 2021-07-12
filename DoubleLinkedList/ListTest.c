@@ -21,9 +21,9 @@ int main(void)
     arr = (int *)malloc(length * sizeof(int));
 
     //所有函数只能有一个出口
-    //判断内存是否分配成功
     do
     {
+        //判断内存是否分配成功
         if (NULL == dl)
         {
             dl_success = false;
@@ -57,6 +57,10 @@ int main(void)
         }
         printf("顺序打印双链表：");
         PrintDataNode(dl);
+
+        printf("%p %p\n",dl->head,dl->tail);
+        printf("%p %p\n",dl->head->next,dl->tail->prev);
+        printf("%p %p\n",first_addr(struct IOData,dl->head->next),first_addr(struct IOData,dl->tail->prev));
 
         printf("往双链表位置index插入值为data的元素：");
         scanf("%d %d", &index, &data);
