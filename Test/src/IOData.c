@@ -5,6 +5,7 @@
 #include "IOData.h"
 
 /*头插法建立IOData链表*/
+//利用一些变量记录函数执行期间的各种异常情况，统一在函数出口处进行判断
 void CreateFromHead(struct DualList* dl,const void* data){
     struct IOData* iod=NULL;
     iod=(struct IOData*)malloc(sizeof(struct IOData));
@@ -120,7 +121,7 @@ void DestroyDataList(struct DualList* dl){
 
 /*快速排序其中一趟，按逆序排*/
 struct Node* ListQuickSort(struct Node* left,struct Node* right){
-    int temp=0;
+    struct IOData_Pack temp;
     int check=0;
     while(left!=right){
         //一趟排序的搜索过程是先左后右
@@ -129,18 +130,18 @@ struct Node* ListQuickSort(struct Node* left,struct Node* right){
             left=left->next;
         }
         if(left!=right){            //当左边left->data值小于右边right->data值
-            temp=(first_addr(struct IOData,left))->data.pack;        //并且left左指针还没有和right右指针重合
-            (first_addr(struct IOData,left))->data.pack=(first_addr(struct IOData,right))->data.pack; //交换left->data和right->data
-            (first_addr(struct IOData,right))->data.pack=temp;
+            memcpy(&temp,first_addr(struct IOData,left),sizeof(struct IOData_Pack));        //并且left左指针还没有和right右指针重合
+            memcpy(first_addr(struct IOData,left),first_addr(struct IOData,right),sizeof(struct IOData_Pack)); //交换left->data和right->data
+            memcpy(first_addr(struct IOData,right),&temp,sizeof(struct IOData_Pack));
         }
     
         while(left!=right&&memcmp(first_addr(struct IOData,left),first_addr(struct IOData,right),sizeof(struct IOData_Pack))>=0){      //再从右边开始搜索
             right=right->prev;
         }
         if(left!=right){            //当左边left->data值小于右边right->data值
-            temp=(first_addr(struct IOData,left))->data.pack;        //并且left左指针还没有和right右指针重合
-            (first_addr(struct IOData,left))->data.pack=(first_addr(struct IOData,right))->data.pack; //交换left->data和right->data
-            (first_addr(struct IOData,right))->data.pack=temp;
+            memcpy(&temp,first_addr(struct IOData,left),sizeof(struct IOData_Pack));        //并且left左指针还没有和right右指针重合
+            memcpy(first_addr(struct IOData,left),first_addr(struct IOData,right),sizeof(struct IOData_Pack)); //交换left->data和right->data
+            memcpy(first_addr(struct IOData,right),&temp,sizeof(struct IOData_Pack));
         }
         //检查left是否与right重合，若不重合继续先左后右搜索
     }
