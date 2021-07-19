@@ -3,9 +3,20 @@
 
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 #include "DoubleLinkedList.h"
 
-/*保存不同类型data数据（不一定是struct）的IOdata，位于内存的另一块区域*/
+//拓展：使所有类型的IOData都通用
+/*以字节(byte)为单位，将数据data从源地址src复制到目标地址dst*/
+#define copy_data(src,dst,end,length)\
+    memcpy(src,dst,length); dst+=length;\
+    while(dst!=end) {*dst=*src; dst++; src++;}\
+/*以字节(byte)为单位，对比源地址src与目的地址dst的数据data*/
+#define compare_data(src,dst,end,check)\
+    while(dst!=end)\
+    {if(*src!=*dst){check=false;break;} else{src++;dst++;}}
+
+/*保存不同类型data数据（不一定是int类型）的IOdata，位于内存的另一块区域*/
 /*可以有struct IOData0,struct IOData1,struct IOData2......*/
 struct IOData
 {

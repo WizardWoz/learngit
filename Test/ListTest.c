@@ -6,65 +6,56 @@
 int main(void)
 {
     //变量声明/赋值分开
-    //声明时最好初始化
+    //变量初始化为0，指针初始化为NULL
     struct DualList *dl = NULL;
-    int *arr = NULL;
-    int choose = 0; //存储用户选择
-    int length = 0; //数组长度
-    int data = 0;   //用户需要查找的元素值
-    int index = 0;  //用户需要查找的下标
-    int i = 0;      //数组下标
+    struct IOData_Pack* iop=NULL;
+    int length = 0; //双链表长度
+    int index = 0;  //用户需要查找的位置
+    int i = 0;      //下标
     bool dl_success = true;
-    bool arr_success = true;
-
-    dl = (struct DualList *)malloc(sizeof(struct DualList));
-    arr = (int *)malloc(length * sizeof(int));
+    bool iop_success = true;
 
     //所有函数只能有一个出口
     do
     {
-        //判断内存是否分配成功
+        dl = (struct DualList *)malloc(sizeof(struct DualList));
+        iop=(struct IOData_Pack*)malloc(sizeof(struct IOData_Pack));
+         //判断内存是否分配成功
+        if(NULL==iop){
+            iop_success=false;
+            printf("IOData_Pack内存分配失败\n");
+            break;
+        }
         if (NULL == dl)
         {
             dl_success = false;
             printf("双链表头结点&尾结点内存分配失败\n");
             break;
         }
-        if (NULL == arr)
-        {
-            arr_success = false;
-            printf("数组内存分配失败\n");
-            break;
-        }
 
-        //查看各种数据大小
-        printf("%ld %ld\n", sizeof(int *), sizeof(int));
-        printf("%ld %ld\n", sizeof(struct Node *), sizeof(struct Node));
-        printf("%ld %ld\n", sizeof(struct IOData *), sizeof(struct IOData));
         //开始测试
+        InitList(dl);
         printf("请输入双链表的长度：");
         scanf("%d", &length);
-        printf("请输入完整数组：");
+
+        //为IOData_Pack结点数据域赋值
+        printf("请输入每个结点的数据data：");
         for (i = 0; i < length; i++)
         {
-            scanf("%d", &arr[i]);
-        }
-        //数组元素转化为IOData结点
-        InitList(dl);
-        for (i = 0; i < length; i++)
-        {
-            CreateFromHead(dl, arr[i]);
+            scanf("%d",&iop->pack);
+            CreateFromHead(dl, iop);
+            // CreateFromTail(dl,iop);
         }
         printf("顺序打印双链表：");
         PrintDataNode(dl);
 
-        printf("%p %p\n",dl->head,dl->tail);
-        printf("%p %p\n",dl->head->next,dl->tail->prev);
-        printf("%p %p\n",first_addr(struct IOData,dl->head->next),first_addr(struct IOData,dl->tail->prev));
+        printf("查找双链表中值为data的元素：");
+        scanf("%d",&iop->pack);
+        SearchDataAtIndex(dl,iop);
 
         printf("往双链表位置index插入值为data的元素：");
-        scanf("%d %d", &index, &data);
-        if (AddDataToIndex(dl, data, index))
+        scanf("%d%d", &index, &iop->pack);
+        if (AddDataToIndex(dl, iop, index))
         {
             printf("位置index插入值为data的元素成功\n");
         }
@@ -89,14 +80,14 @@ int main(void)
         PrintDataNode(dl);
 
         printf("删除双链表中值为data的元素：");
-        scanf("%d", &data);
-        if (DelDataOfValue(dl, data))
+        scanf("%d", &iop->pack);
+        if (DelDataOfValue(dl, iop,sizeof(struct IOData_Pack)))
         {
             printf("删除值为data的元素成功\n");
         }
         else
         {
-            printf("删除值为data的元素失败\n");
+            printf("双链表中无值为%d的结点\n",iop->pack);
         }
         printf("顺序打印双链表：");
         PrintDataNode(dl);
@@ -108,13 +99,14 @@ int main(void)
 
         printf("销毁双链表......\n");
         DestroyDataList(dl);
+
     } while (0);
 
     if(dl_success==true){
         free(dl);
     }
-    if(arr_success==true){
-        free(arr);
+    if(iop_success==true){
+        free(iop);
     }
 
     return 0;

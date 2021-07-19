@@ -1,26 +1,40 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "IOData.h"
+#include <string.h>
 #include "DoubleLinkedList.h"
+#include "IOData.h"
 
 /*头插法建立IOData链表*/
-void CreateFromHead(struct DualList* dl,int data){
-    struct IOData* iod=(struct IOData*)malloc(sizeof(struct IOData));
-    iod->data=data;
+void CreateFromHead(struct DualList* dl,const void* data){
+    struct IOData* iod=NULL;
+    iod=(struct IOData*)malloc(sizeof(struct IOData));
+    if(NULL==iod){
+        printf("IOData内存申请失败");
+        return;
+    }
+    memset(iod,0,sizeof(struct IOData));
+    memcpy(&iod->data,data,sizeof(struct IOData_Pack));
     AddListHead(dl,&iod->list_node);
 }
 
 /*尾插法建立IOData链表*/
-void CreateFromTail(struct DualList* dl,int data){
-    struct IOData* iod=(struct IOData*)malloc(sizeof(struct IOData));
-    iod->data=data;
+void CreateFromTail(struct DualList* dl,const void* data){
+    struct IOData* iod=NULL;
+    iod=(struct IOData*)malloc(sizeof(struct IOData));
+    if(NULL==iod){
+        printf("IOData内存申请失败");
+        return;
+    }
+    memset(iod,0,sizeof(struct IOData));
+    memcpy(&iod->data,data,sizeof(struct IOData_Pack));
     AddListTail(dl,&iod->list_node);
 }
 
 /*将值为data的IOData结点加入双链表index位置处*/
-bool AddDataToIndex(struct DualList* dl,int data,int index){
+bool AddDataToIndex(struct DualList* dl,const void* data,int index){
     struct IOData* iod=(struct IOData*)malloc(sizeof(struct IOData));
-    iod->data=data;
+    memset(iod,0,sizeof(struct IOData));
+    memcpy(&iod->data,data,sizeof(struct IOData_Pack));
     struct Node* p=NULL;
     list_foreach_head(p,dl->head,dl->tail){
         if(index<=0){
@@ -56,26 +70,41 @@ bool DelDataAtIndex(struct DualList* dl,int index){
     return false;
 }
 
-/*删除指定data值的IOData结点*/
-bool DelDataOfValue(struct DualList* dl,int data){
+/*删除所有指定data值的IOData结点*/
+bool DelDataOfValue(struct DualList* dl,const void* data,int length){
     struct Node* p=NULL;
     //check：记录当前每个字节的比较状态
-    bool check=true;
+    bool check=false;
     list_foreach_head(p,dl->head,dl->tail){
         //若存储的值相同，则删除当前p指向的结点
-        if((first_addr(struct IOData,p))->data==data){
+        if(memcmp(data,first_addr(struct IOData,p),sizeof(struct IOData_Pack))==0){
             DeleteNode(p);
             free(first_addr(struct IOData,p));
+            check=true;
         }
     }
-    return false;
+    return check;
+}
+
+/*查找值为data的结点的位置index*/
+void SearchDataAtIndex(struct DualList* dl,const void* data){
+    struct Node* p=NULL;
+    int index=1;
+    printf("值为data的结点的位置index：");
+    list_foreach_head(p,dl->head,dl->tail){
+        if(memcmp(data,first_addr(struct IOData,p),sizeof(struct IOData_Pack))==0){
+            printf("%d ",index);
+        }
+        index++;
+    }
+    printf("\n");
 }
 
 /*打印IOData结点*/
 void PrintDataNode(struct DualList* dl){
     struct Node* p=NULL;
     list_foreach_head(p,dl->head,dl->tail){
-        printf("%d ",(first_addr(struct IOData,p))->data);
+        printf("%d ",((first_addr(struct IOData,p))->data).pack);
     }
     printf("\n");
 }
@@ -84,9 +113,6 @@ void PrintDataNode(struct DualList* dl){
 void DestroyDataList(struct DualList* dl){
     struct Node* p=NULL;
     list_foreach_head(p,dl->head,dl->tail){
-        printf("%p %p\n",dl->head,dl->tail);
-        printf("%p %p\n",dl->head->next,dl->tail->prev);
-        printf("%p %p\n",first_addr(struct IOData,dl->head->next),first_addr(struct IOData,dl->tail->prev));
         DeleteNode(p);
         free(first_addr(struct IOData,p));
     }
@@ -95,27 +121,28 @@ void DestroyDataList(struct DualList* dl){
 /*快速排序其中一趟，按逆序排*/
 struct Node* ListQuickSort(struct Node* left,struct Node* right){
     int temp=0;
+    int check=0;
     while(left!=right){
         //一趟排序的搜索过程是先左后右
         //先从左边开始搜索，left!=right是为了排除双链表中有多个相同元素的影响
-        while(left!=right&&(first_addr(struct IOData,left))->data>=(first_addr(struct IOData,right))->data){      
+        while(left!=right&&memcmp(first_addr(struct IOData,left),first_addr(struct IOData,right),sizeof(struct IOData_Pack))>=0){      
             left=left->next;
         }
         if(left!=right){            //当左边left->data值小于右边right->data值
-            temp=(first_addr(struct IOData,left))->data;        //并且left左指针还没有和right右指针重合
-            (first_addr(struct IOData,left))->data=(first_addr(struct IOData,right))->data; //交换left->data和right->data
-            (first_addr(struct IOData,right))->data=temp;
+            temp=(first_addr(struct IOData,left))->data.pack;        //并且left左指针还没有和right右指针重合
+            (first_addr(struct IOData,left))->data.pack=(first_addr(struct IOData,right))->data.pack; //交换left->data和right->data
+            (first_addr(struct IOData,right))->data.pack=temp;
         }
     
-        while(left!=right&&(first_addr(struct IOData,right))->data<=(first_addr(struct IOData,left))->data){      //再从右边开始搜索
+        while(left!=right&&memcmp(first_addr(struct IOData,left),first_addr(struct IOData,right),sizeof(struct IOData_Pack))>=0){      //再从右边开始搜索
             right=right->prev;
         }
         if(left!=right){            //当左边left->data值小于右边right->data值
-            temp=(first_addr(struct IOData,left))->data;        //并且left左指针还没有和right右指针重合
-            (first_addr(struct IOData,left))->data=(first_addr(struct IOData,right))->data; //交换left->data和right->data
-            (first_addr(struct IOData,right))->data=temp;
+            temp=(first_addr(struct IOData,left))->data.pack;        //并且left左指针还没有和right右指针重合
+            (first_addr(struct IOData,left))->data.pack=(first_addr(struct IOData,right))->data.pack; //交换left->data和right->data
+            (first_addr(struct IOData,right))->data.pack=temp;
         }
-        //检查left是否与right重合，若不重合继续先左后右搜索，
+        //检查left是否与right重合，若不重合继续先左后右搜索
     }
     return left;
 }

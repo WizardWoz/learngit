@@ -3,7 +3,6 @@
 
 #include <stdlib.h>
 
-//类函数宏
 /*正向迭代*/
 #define list_foreach_head(pos,head,tail)\
     for(pos=head->next;pos!=tail;pos=pos->next)
@@ -11,6 +10,10 @@
 /*反向迭代*/
 #define list_foreach_tail(pos,head,tail)\
     for(pos=tail->prev;pos!=head;pos=pos->prev)
+
+/*双向迭代*/
+#define list_foreach_doudir(p,q,head,tail)\
+    for(p=head->next,q=tail->prev;p!=q;p=p->next,q=q->prev)
     
 /*寻找每个IOData的首地址*/
 #define first_addr(type,p)\

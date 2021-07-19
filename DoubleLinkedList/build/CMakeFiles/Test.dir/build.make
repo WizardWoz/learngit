@@ -60,41 +60,41 @@ include CMakeFiles/Test.dir/flags.make
 CMakeFiles/Test.dir/src/DoubleLinkedList.c.o: CMakeFiles/Test.dir/flags.make
 CMakeFiles/Test.dir/src/DoubleLinkedList.c.o: ../src/DoubleLinkedList.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/george/C_Programs/DoubleLinkedList/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/Test.dir/src/DoubleLinkedList.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/Test.dir/src/DoubleLinkedList.c.o   -c /home/george/C_Programs/DoubleLinkedList/src/DoubleLinkedList.c
+	/bin/x86_64-linux-gnu-gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/Test.dir/src/DoubleLinkedList.c.o   -c /home/george/C_Programs/DoubleLinkedList/src/DoubleLinkedList.c
 
 CMakeFiles/Test.dir/src/DoubleLinkedList.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Test.dir/src/DoubleLinkedList.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/george/C_Programs/DoubleLinkedList/src/DoubleLinkedList.c > CMakeFiles/Test.dir/src/DoubleLinkedList.c.i
+	/bin/x86_64-linux-gnu-gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/george/C_Programs/DoubleLinkedList/src/DoubleLinkedList.c > CMakeFiles/Test.dir/src/DoubleLinkedList.c.i
 
 CMakeFiles/Test.dir/src/DoubleLinkedList.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Test.dir/src/DoubleLinkedList.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/george/C_Programs/DoubleLinkedList/src/DoubleLinkedList.c -o CMakeFiles/Test.dir/src/DoubleLinkedList.c.s
+	/bin/x86_64-linux-gnu-gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/george/C_Programs/DoubleLinkedList/src/DoubleLinkedList.c -o CMakeFiles/Test.dir/src/DoubleLinkedList.c.s
 
 CMakeFiles/Test.dir/src/IOData.c.o: CMakeFiles/Test.dir/flags.make
 CMakeFiles/Test.dir/src/IOData.c.o: ../src/IOData.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/george/C_Programs/DoubleLinkedList/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/Test.dir/src/IOData.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/Test.dir/src/IOData.c.o   -c /home/george/C_Programs/DoubleLinkedList/src/IOData.c
+	/bin/x86_64-linux-gnu-gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/Test.dir/src/IOData.c.o   -c /home/george/C_Programs/DoubleLinkedList/src/IOData.c
 
 CMakeFiles/Test.dir/src/IOData.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Test.dir/src/IOData.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/george/C_Programs/DoubleLinkedList/src/IOData.c > CMakeFiles/Test.dir/src/IOData.c.i
+	/bin/x86_64-linux-gnu-gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/george/C_Programs/DoubleLinkedList/src/IOData.c > CMakeFiles/Test.dir/src/IOData.c.i
 
 CMakeFiles/Test.dir/src/IOData.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Test.dir/src/IOData.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/george/C_Programs/DoubleLinkedList/src/IOData.c -o CMakeFiles/Test.dir/src/IOData.c.s
+	/bin/x86_64-linux-gnu-gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/george/C_Programs/DoubleLinkedList/src/IOData.c -o CMakeFiles/Test.dir/src/IOData.c.s
 
 CMakeFiles/Test.dir/ListTest.c.o: CMakeFiles/Test.dir/flags.make
 CMakeFiles/Test.dir/ListTest.c.o: ../ListTest.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/george/C_Programs/DoubleLinkedList/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/Test.dir/ListTest.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/Test.dir/ListTest.c.o   -c /home/george/C_Programs/DoubleLinkedList/ListTest.c
+	/bin/x86_64-linux-gnu-gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/Test.dir/ListTest.c.o   -c /home/george/C_Programs/DoubleLinkedList/ListTest.c
 
 CMakeFiles/Test.dir/ListTest.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Test.dir/ListTest.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/george/C_Programs/DoubleLinkedList/ListTest.c > CMakeFiles/Test.dir/ListTest.c.i
+	/bin/x86_64-linux-gnu-gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/george/C_Programs/DoubleLinkedList/ListTest.c > CMakeFiles/Test.dir/ListTest.c.i
 
 CMakeFiles/Test.dir/ListTest.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Test.dir/ListTest.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/george/C_Programs/DoubleLinkedList/ListTest.c -o CMakeFiles/Test.dir/ListTest.c.s
+	/bin/x86_64-linux-gnu-gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/george/C_Programs/DoubleLinkedList/ListTest.c -o CMakeFiles/Test.dir/ListTest.c.s
 
 # Object files for target Test
 Test_OBJECTS = \
